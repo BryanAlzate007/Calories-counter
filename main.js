@@ -1,7 +1,37 @@
 
 
+const formulario = document.getElementById('formulario-calculadora');
+const resultado = document.getElementById('resultado');
+const nombre = document.querySelector('#nombre').value;
+const documento = document.querySelector('#documento').value;
+const nDocumento = document.querySelector('#nDocumento').value;
+const edad =  document.querySelector('#edad').value;
+const peso = document.querySelector('#peso').value;
+const altura = document.querySelector('#altura').value;
+const actividad = document.querySelector('#actividad').value;
+const genero = document.querySelector('input[name="genero"]:checkend');
+
+
+
+let usuario = {
+    nombre: nombre,
+    documento: documento,
+    nDocumento: nDocumento,
+    edad: edad,
+    peso: peso,
+    altura: altura,
+    actividad: actividad,
+    genero: genero
+}
+console.log(usuario);
+formulario.addEventListener('submit', (evento) => {
+    evento.preventDefault();
+    calcularCalorias();
+})
 
 function calcularCalorias() {
+    aparecerResultado();
+}
 
     const multiplicadorTMB = {
         peso: 10,
@@ -20,13 +50,13 @@ function calcularCalorias() {
         <div class=" card-body d-flex flex-column justify-content-center align-items-center h-100" id="calculo">
             <h5 class="card-title h2">Calorías requeridas</h5>
             <div class="mb-3 w-100">
-                <input class="form-control text-center" value="${} kcal" style="font-size: 2rem" disabled>
+                <input class="form-control text-center" value="$ kcal" style="font-size: 2rem" disabled>
             </div>
         </div>
     `
      // Volver a limpiar variables
 
-}
+
 
 function mostrarMensajeDeError(msg) {
     const calculo = document.querySelector('#calculo');
