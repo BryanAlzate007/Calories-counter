@@ -1,7 +1,10 @@
-
-
 const formulario = document.getElementById('formulario-calculadora');
 const resultado = document.getElementById('resultado');
+
+formulario.addEventListener('submit', (evento) => {
+    evento.preventDefault();
+    calcularCalorias();
+
 const nombre = document.querySelector('#nombre').value;
 const documento = document.querySelector('#documento').value;
 const nDocumento = document.querySelector('#nDocumento').value;
@@ -9,9 +12,7 @@ const edad =  document.querySelector('#edad').value;
 const peso = document.querySelector('#peso').value;
 const altura = document.querySelector('#altura').value;
 const actividad = document.querySelector('#actividad').value;
-const genero = document.querySelector('input[name="genero"]:checkend');
-
-
+const generoSeleccionado = document.querySelector('input[name="genero"]:checked').value;
 
 let usuario = {
     nombre: nombre,
@@ -21,24 +22,33 @@ let usuario = {
     peso: peso,
     altura: altura,
     actividad: actividad,
-    genero: genero
+    genero: generoSeleccionado
 }
-console.log(usuario);
-formulario.addEventListener('submit', (evento) => {
-    evento.preventDefault();
-    calcularCalorias();
+console.log(usuario)
+return usuario;
 })
 
-function calcularCalorias() {
-    aparecerResultado();
-}
+//unction resultado() {
 
+//}
+function calcularCalorias(usuario) {
+    aparecerResultado();  
+    
+
+    if (this.genero === "M"){
+        formulaHombres = (this.actividad * (multiplicadorTMB.peso*this.peso)+(multiplicadorTMB.altura*this.altura)-(multiplicadorTMB.edad*this.edad)+5);
+    }else {
+        formulaMujeres = (this.actividad * (multiplicadorTMB.peso*this.peso)+(multiplicadorTMB.altura*this.altura)-(multiplicadorTMB.edad*this.edad)-161);
+    }
+}
     const multiplicadorTMB = {
         peso: 10,
         altura: 6.25,
         edad: 5
-    }
+}
+ 
 
+  
         //Formula hombres: valor actividad x (10 x peso en kg) + (6,25 × altura en cm) - (5 × edad en años) + 5
 
         //Formula mujeres: valor actividad x (10 x peso en kg) + (6,25 × altura en cm) - (5 × edad en años) - 161
@@ -50,7 +60,7 @@ function calcularCalorias() {
         <div class=" card-body d-flex flex-column justify-content-center align-items-center h-100" id="calculo">
             <h5 class="card-title h2">Calorías requeridas</h5>
             <div class="mb-3 w-100">
-                <input class="form-control text-center" value="$ kcal" style="font-size: 2rem" disabled>
+                <input class="form-control text-center" value="${'bryan'} kcal" style="font-size: 2rem" disabled>
             </div>
         </div>
     `
