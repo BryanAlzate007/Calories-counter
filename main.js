@@ -1,9 +1,13 @@
 const formulario = document.getElementById('formulario-calculadora');
 const resultado = document.getElementById('resultado');
+const multiplicadorTMB = {
+    peso: 10,
+    altura: 6.25,
+    edad: 5
+}
 
 formulario.addEventListener('submit', (evento) => {
     evento.preventDefault();
-    calcularCalorias();
 
 const nombre = document.querySelector('#nombre').value;
 const documento = document.querySelector('#documento').value;
@@ -25,7 +29,7 @@ let usuario = {
     genero: generoSeleccionado
 }
 console.log(usuario)
-return usuario;
+calcularCalorias(usuario);
 })
 
 //unction resultado() {
@@ -33,19 +37,18 @@ return usuario;
 //}
 function calcularCalorias(usuario) {
     aparecerResultado();  
-    
+    let resultadoCalorias;
 
-    if (this.genero === "M"){
-        formulaHombres = (this.actividad * (multiplicadorTMB.peso*this.peso)+(multiplicadorTMB.altura*this.altura)-(multiplicadorTMB.edad*this.edad)+5);
+    if (usuario.genero === "M"){
+        resultadoCalorias = (usuario.actividad * (multiplicadorTMB.peso*usuario.peso)+(multiplicadorTMB.altura*usuario.altura)-(multiplicadorTMB.edad*usuario.edad)+5);
+        console.log(resultadoCalorias);
     }else {
-        formulaMujeres = (this.actividad * (multiplicadorTMB.peso*this.peso)+(multiplicadorTMB.altura*this.altura)-(multiplicadorTMB.edad*this.edad)-161);
+        resultadoCalorias = (usuario.actividad * (multiplicadorTMB.peso*usuario.peso)+(multiplicadorTMB.altura*usuario.altura)-(multiplicadorTMB.edad*usuario.edad)-161);
     }
+    console.log(resultadoCalorias);
+    return resultadoCalorias;
 }
-    const multiplicadorTMB = {
-        peso: 10,
-        altura: 6.25,
-        edad: 5
-}
+
  
 
   
@@ -56,11 +59,12 @@ function calcularCalorias(usuario) {
     
     // totalCalorias.value = `${Math.floor(calculoCalorias)} kcal`;
     
+resultadosCalorias = calcularCalorias(usuario);     
     resultado.innerHTML = `
         <div class=" card-body d-flex flex-column justify-content-center align-items-center h-100" id="calculo">
             <h5 class="card-title h2">Calorías requeridas</h5>
             <div class="mb-3 w-100">
-                <input class="form-control text-center" value="${'bryan'} kcal" style="font-size: 2rem" disabled>
+                <input class="form-control text-center" value="${resultadosCalorias} kcal" style="font-size: 2rem" disabled>
             </div>
         </div>
     `
