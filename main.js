@@ -30,14 +30,22 @@ let usuario = {
 }
 console.log(usuario)
 calcularCalorias(usuario);
+grupoPoblacional(usuario);
+aparecerResultado();
+
 })
 
 //unction resultado() {
 
 //}
+let resultadoCalorias;
+let resultadoPoblacional;
+
 function calcularCalorias(usuario) {
-    aparecerResultado();  
-    let resultadoCalorias;
+    if (!(usuario.actividad && usuario.altura && usuario.edad)){
+        mostrarMensajeDeError('Debe de registrar todos los campos')
+    }
+    
 
     if (usuario.genero === "M"){
         resultadoCalorias = (usuario.actividad * (multiplicadorTMB.peso*usuario.peso)+(multiplicadorTMB.altura*usuario.altura)-(multiplicadorTMB.edad*usuario.edad)+5);
@@ -45,29 +53,42 @@ function calcularCalorias(usuario) {
     }else {
         resultadoCalorias = (usuario.actividad * (multiplicadorTMB.peso*usuario.peso)+(multiplicadorTMB.altura*usuario.altura)-(multiplicadorTMB.edad*usuario.edad)-161);
     }
-    console.log(resultadoCalorias);
-    return resultadoCalorias;
-}
 
- 
-
-  
         //Formula hombres: valor actividad x (10 x peso en kg) + (6,25 × altura en cm) - (5 × edad en años) + 5
 
         //Formula mujeres: valor actividad x (10 x peso en kg) + (6,25 × altura en cm) - (5 × edad en años) - 161
-
     
-    // totalCalorias.value = `${Math.floor(calculoCalorias)} kcal`;
-    
-resultadosCalorias = calcularCalorias(usuario);     
     resultado.innerHTML = `
-        <div class=" card-body d-flex flex-column justify-content-center align-items-center h-100" id="calculo">
-            <h5 class="card-title h2">Calorías requeridas</h5>
-            <div class="mb-3 w-100">
-                <input class="form-control text-center" value="${resultadosCalorias} kcal" style="font-size: 2rem" disabled>
-            </div>
+    <div class=" card-body d-flex flex-column justify-content-center align-items-center h-100" id="calculo">
+        <h5 class="card-title h2">Calorías requeridas</h5>
+        <div class="mb-3 w-100">
+            <input class="form-control text-center" value="El paciente ${usuario.nombre}  identificado con ${usuario.documento}
+            NO. ${usuario.nDocumento}, requiere un total de ${Math.floor(resultadoCalorias)} kcal
+            para el sostenimiento de su TBM" style="font-size: 2rem" disabled>
         </div>
-    `
+    </div>
+`
+} 
+function grupoPoblacional(usuario){
+
+    if(usuario.edad <= 29 ){
+        resultadoPoblacional = "Joven";
+    }
+    if(usuario.edad >= 30 && usuario.edad <= 59) {
+        resultadoPoblacional = "Adultos";
+    }
+    else{
+        resultadoPoblacional = "Adultos mayores"
+    }
+    //resultado.innerHTML = `
+    //<div class=" card-body d-flex flex-column justify-content-center align-items-center h-100" id="calculo">
+      //  <h5 class="card-title h2">Calorías requeridas</h5>
+      //  <div class="mb-3 w-100">
+        //    <input class="form-control text-center" value="El Usuario pertenece al siguiente grupo poblacional ${grupoPoblacional}" style="font-size: 2rem" disabled>
+      //</div>
+    //</div>
+  //  `
+}
      // Volver a limpiar variables
 
 
