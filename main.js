@@ -32,12 +32,9 @@ console.log(usuario)
 calcularCalorias(usuario);
 
 aparecerResultado();
-
+limpiar();
 })
 
-//unction resultado() {
-
-//}
 let resultadoCalorias;
 let resultadoPoblacional;
 function grupoPoblacional(usuario){
@@ -66,10 +63,7 @@ function calcularCalorias(usuario) {
         resultadoCalorias = (usuario.actividad * (multiplicadorTMB.peso*usuario.peso)+(multiplicadorTMB.altura*usuario.altura)-(multiplicadorTMB.edad*usuario.edad)-161);
     }
 
-        //Formula hombres: valor actividad x (10 x peso en kg) + (6,25 × altura en cm) - (5 × edad en años) + 5
 
-        //Formula mujeres: valor actividad x (10 x peso en kg) + (6,25 × altura en cm) - (5 × edad en años) - 161
-    
     resultado.innerHTML = `
     <div class=" card-body d-flex flex-column justify-content-center align-items-center h-100" id="calculo">
         <h5 class="card-title h2">Calorías requeridas</h5>
@@ -80,7 +74,7 @@ function calcularCalorias(usuario) {
         NO. ${usuario.nDocumento}
         Requiere un total de ${Math.floor(resultadoCalorias)} kcal
         para el sostenimiento de su TBM
-        
+
         Su Grupo Poblacional es ${resultadoPoblacional}
         </textarea>
 
@@ -90,7 +84,16 @@ function calcularCalorias(usuario) {
 } 
 
      // Volver a limpiar variables
-
+function limpiar(){
+    nombre.value = null;
+    documento.value = null;
+    nDocumento.value = null;
+    edad.value =  null;
+    peso.value = null;
+    altura.value = null;
+    actividad.value = null;
+}
+    
 
 
 function mostrarMensajeDeError(msg) {
