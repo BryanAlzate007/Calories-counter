@@ -30,7 +30,7 @@ let usuario = {
 }
 console.log(usuario)
 calcularCalorias(usuario);
-grupoPoblacional(usuario);
+
 aparecerResultado();
 
 })
@@ -40,12 +40,24 @@ aparecerResultado();
 //}
 let resultadoCalorias;
 let resultadoPoblacional;
+function grupoPoblacional(usuario){
+
+    if(usuario.edad <= 29 ){
+        resultadoPoblacional = "Joven";
+    } else if(usuario.edad >= 30 && usuario.edad <= 59) {
+        resultadoPoblacional = "Adultos";
+    }
+    else{
+        resultadoPoblacional = "Adultos mayores"
+    }
+ 
+}
 
 function calcularCalorias(usuario) {
     if (!(usuario.actividad && usuario.altura && usuario.edad)){
         mostrarMensajeDeError('Debe de registrar todos los campos')
     }
-    
+    grupoPoblacional(usuario);
 
     if (usuario.genero === "M"){
         resultadoCalorias = (usuario.actividad * (multiplicadorTMB.peso*usuario.peso)+(multiplicadorTMB.altura*usuario.altura)-(multiplicadorTMB.edad*usuario.edad)+5);
@@ -62,33 +74,21 @@ function calcularCalorias(usuario) {
     <div class=" card-body d-flex flex-column justify-content-center align-items-center h-100" id="calculo">
         <h5 class="card-title h2">Calorías requeridas</h5>
         <div class="mb-3 w-100">
-            <input class="form-control text-center" value="El paciente ${usuario.nombre}  identificado con ${usuario.documento}
-            NO. ${usuario.nDocumento}, requiere un total de ${Math.floor(resultadoCalorias)} kcal
-            para el sostenimiento de su TBM" style="font-size: 2rem" disabled>
+        <textarea class="form-control text-justify" style="font-size: 1rem; height: 180px; text-align: justify; overflow-y: auto;" disabled>
+        El paciente ${usuario.nombre}
+        Identificado con ${usuario.documento}
+        NO. ${usuario.nDocumento}
+        Requiere un total de ${Math.floor(resultadoCalorias)} kcal
+        para el sostenimiento de su TBM
+        
+        Su Grupo Poblacional es ${resultadoPoblacional}
+        </textarea>
+
         </div>
     </div>
 `
 } 
-function grupoPoblacional(usuario){
 
-    if(usuario.edad <= 29 ){
-        resultadoPoblacional = "Joven";
-    }
-    if(usuario.edad >= 30 && usuario.edad <= 59) {
-        resultadoPoblacional = "Adultos";
-    }
-    else{
-        resultadoPoblacional = "Adultos mayores"
-    }
-    //resultado.innerHTML = `
-    //<div class=" card-body d-flex flex-column justify-content-center align-items-center h-100" id="calculo">
-      //  <h5 class="card-title h2">Calorías requeridas</h5>
-      //  <div class="mb-3 w-100">
-        //    <input class="form-control text-center" value="El Usuario pertenece al siguiente grupo poblacional ${grupoPoblacional}" style="font-size: 2rem" disabled>
-      //</div>
-    //</div>
-  //  `
-}
      // Volver a limpiar variables
 
 
