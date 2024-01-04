@@ -51,9 +51,7 @@ function grupoPoblacional(usuario){
 }
 
 function calcularCalorias(usuario) {
-    if (!(usuario.actividad && usuario.altura && usuario.edad)){
-        mostrarMensajeDeError('Debe de registrar todos los campos')
-    }
+
     grupoPoblacional(usuario);
 
     if (usuario.genero === "M"){
@@ -81,6 +79,10 @@ function calcularCalorias(usuario) {
         </div>
     </div>
 `
+
+if (!(usuario.actividad && usuario.altura && usuario.edad)){
+    mostrarMensajeDeError('Debe de registrar todos los campos')
+}
 } 
 
      // Volver a limpiar variables
