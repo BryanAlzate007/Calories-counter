@@ -1,5 +1,4 @@
 const formulario = document.getElementById('formulario-calculadora');
-//const resultado = document.getElementById('resultado');
 const multiplicadorTMB = {peso: 10, altura: 6.25, edad: 5 }
 let resultadoCalorias;
 let resultadoPoblacional;
@@ -24,7 +23,9 @@ let usuario = {
     peso: peso,
     altura: altura,
     actividad: actividad,
-    genero: generoSeleccionado
+    genero: generoSeleccionado,
+    calorias: resultadoCalorias,
+    grupo: resultadoPoblacional,
 }
 usuarios.push(usuario);
 console.log(usuarios);
@@ -60,23 +61,6 @@ function calcularCalorias(usuario) {
     }
 
     actualizarDom ();
-    //resultado.innerHTML = `
-    //<div class=" card-body d-flex flex-column justify-content-center align-items-center h-100" id="calculo">
-      //  <h5 class="card-title h2">Calorías requeridas</h5>
-        //<div class="mb-3 w-100">
-        //<textarea class="form-control text-justify" style="font-size: 1rem; height: 180px; text-align: justify; overflow-y: auto;" disabled>
-        //El paciente ${usuario.nombre}
-        //Identificado con ${usuario.documento}
-        //NO. ${usuario.nDocumento}
-       // Requiere un total de ${Math.floor(resultadoCalorias)} kcal
-        //para el sostenimiento de su TBM
-
-        //Su Grupo Poblacional es ${resultadoPoblacional}
-        //</textarea>
-
-        //</div>
-    //</div>
-//`
 
 if (!(usuario.actividad && usuario.altura && usuario.edad)){
     mostrarMensajeDeError('Debe de registrar todos los campos')
@@ -88,12 +72,15 @@ function actualizarDom (){
     resultado.innerHTML = '';
     usuarios.forEach((usuario) => {
         const usuarioDiv = document.createElement('div');
-       // usuarioDiv.className = 'usuario-info';
         usuarioDiv.innerHTML = `
             <p>Nombre: ${usuario.nombre}</p>
-            <p>Documento: ${usuario.documento} No. ${usuario.nDocumento}</p>
+            <p>Tipo de Documento: ${usuario.documento}</p>
+            <p>No. ${usuario.nDocumento}</p>
             <p>Edad: ${usuario.edad}, Peso: ${usuario.peso}, Altura: ${usuario.altura}</p>
             <p>Actividad: ${usuario.actividad}, Género: ${usuario.genero}</p>
+            <p>Cantidad de calorias: ${usuario.calorias}</p>
+            <p>Grupo poblacional: ${usuario.grupo}</p>
+            <p>_______________________________________________________________</p>
         `;
 
         resultado.appendChild(usuarioDiv);
