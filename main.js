@@ -1,7 +1,5 @@
 const formulario = document.getElementById('formulario-calculadora');
 const multiplicadorTMB = {peso: 10, altura: 6.25, edad: 5 }
-let resultadoCalorias;
-let resultadoPoblacional;
 let usuarios = [];
 formulario.addEventListener('submit', (evento) => {
     evento.preventDefault();
@@ -14,6 +12,13 @@ const peso = document.querySelector('#peso').value;
 const altura = document.querySelector('#altura').value;
 const actividad = document.querySelector('#actividad').value;
 const generoSeleccionado = document.querySelector('input[name="genero"]:checked').value;
+
+if (!nombre || !documento || !nDocumento || !edad || !peso || !altura || !actividad || !generoSeleccionado) {
+    mostrarMensajeDeError('Todos los campos son obligatorios');
+    return;
+}
+const resultadoPoblacional = grupoPoblacional(edad);
+const resultadoCalorias = calcularCalorias(peso,altura,edad,actividad, generoSeleccionado);
 
 let usuario = {
     nombre: nombre,
@@ -28,43 +33,26 @@ let usuario = {
     grupo: resultadoPoblacional,
 }
 usuarios.push(usuario);
-console.log(usuarios);
-calcularCalorias(usuario);
 aparecerResultado();
+actualizarDom ();
+console.log(usuarios);
 limpiar();
 
 })
 
 
-function grupoPoblacional(usuario){
-
-    if(usuario.edad <= 29 ){
-        resultadoPoblacional = "Joven";
-    } else if(usuario.edad >= 30 && usuario.edad <= 59) {
-        resultadoPoblacional = "Adultos";
-    }
-    else{
-        resultadoPoblacional = "Adultos mayores"
-    }
- 
+function grupoPoblacional(edad){
+    if(edad <= 29 )return "Joven";
+    else if(edad <= 59) return "Adultos";
+    else return "Adultos mayores";
 }
 
-function calcularCalorias(usuario) {
-    
-    grupoPoblacional(usuario);
-
-    if (usuario.genero === "M"){
-        resultadoCalorias = (usuario.actividad * (multiplicadorTMB.peso*usuario.peso)+(multiplicadorTMB.altura*usuario.altura)-(multiplicadorTMB.edad*usuario.edad)+5);
-        console.log(resultadoCalorias);
-    }else {
-        resultadoCalorias = (usuario.actividad * (multiplicadorTMB.peso*usuario.peso)+(multiplicadorTMB.altura*usuario.altura)-(multiplicadorTMB.edad*usuario.edad)-161);
+function calcularCalorias(peso,altura,edad,actividad, genero) {
+    if (genero === "M") {
+        return Math.floor(actividad * (multiplicadorTMB.peso * peso + multiplicadorTMB.altura * altura - multiplicadorTMB.edad * edad + 5));
+    } else {
+        return Math.floor(actividad * (multiplicadorTMB.peso * peso + multiplicadorTMB.altura * altura - multiplicadorTMB.edad * edad - 161));
     }
-
-    actualizarDom ();
-
-if (!(usuario.actividad && usuario.altura && usuario.edad)){
-    mostrarMensajeDeError('Debe de registrar todos los campos')
-}
 } 
 
 function actualizarDom (){
@@ -73,11 +61,9 @@ function actualizarDom (){
     usuarios.forEach((usuario) => {
         const usuarioDiv = document.createElement('div');
         usuarioDiv.innerHTML = `
-            <p>Nombre: ${usuario.nombre}</p>
-            <p>Tipo de Documento: ${usuario.documento}</p>
+            <p>El paciente: ${usuario.nombre}</p>
+            <p>Identificado con ${usuario.documento}</p>
             <p>No. ${usuario.nDocumento}</p>
-            <p>Edad: ${usuario.edad}, Peso: ${usuario.peso}, Altura: ${usuario.altura}</p>
-            <p>Actividad: ${usuario.actividad}, Género: ${usuario.genero}</p>
             <p>Cantidad de calorias: ${usuario.calorias}</p>
             <p>Grupo poblacional: ${usuario.grupo}</p>
             <p>_______________________________________________________________</p>
