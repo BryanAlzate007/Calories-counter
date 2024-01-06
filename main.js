@@ -36,7 +36,7 @@ usuarios.push(usuario);
 aparecerResultado();
 actualizarDom ();
 console.log(usuarios);
-limpiar();
+formulario.reset();
 
 })
 
@@ -72,19 +72,6 @@ function actualizarDom (){
         resultado.appendChild(usuarioDiv);
     })
 }
-     // Volver a limpiar variables
-function limpiar(){
-    nombre.value = null;
-    documento.value = null;
-    nDocumento.value = null;
-    edad.value =  null;
-    peso.value = null;
-    altura.value = null;
-    actividad.value = null;
-}
-    
-
-
 function mostrarMensajeDeError(msg) {
     const calculo = document.querySelector('#calculo');
     if (calculo) {
